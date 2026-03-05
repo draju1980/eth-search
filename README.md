@@ -178,6 +178,29 @@ The production server starts at [http://localhost:3000](http://localhost:3000).
 npm run lint
 ```
 
+### 8. Docker Compose
+
+You can run the app in a Docker container instead of installing Node.js locally.
+
+**Prerequisites:** [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/) installed.
+
+```bash
+# Create your .env file
+cp .env.example .env
+# Edit .env and set ETHEREUM_RPC_URL
+
+# Build and start
+docker compose up --build
+
+# Or run in the background
+docker compose up --build -d
+
+# Stop
+docker compose down
+```
+
+The app will be available at [http://localhost:3000](http://localhost:3000).
+
 ### Troubleshooting
 
 | Issue | Fix |

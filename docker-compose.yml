@@ -1,0 +1,14 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - ETHEREUM_RPC_URL=${ETHEREUM_RPC_URL}
+        - ETHEREUM_WS_URL=${ETHEREUM_WS_URL:-}
+        - ETHEREUM_RPC_URL_FALLBACK=${ETHEREUM_RPC_URL_FALLBACK:-}
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    restart: unless-stopped
