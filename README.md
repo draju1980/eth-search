@@ -112,6 +112,80 @@ src/
 - **Phase 4**: Transaction graph visualization (Cytoscape.js), fund flow tracing, pattern detection
 - **Phase 5**: SEO, accessibility, Docker, production deployment
 
+## Local Testing
+
+### 1. Prerequisites
+
+- **Node.js** v20 or later
+- **npm** (comes with Node.js)
+- An **Ethereum RPC endpoint** — you can get a free one from [Alchemy](https://www.alchemy.com/) or [Infura](https://www.infura.io/)
+
+### 2. Clone and Install
+
+```bash
+git clone <repo-url>
+cd eth-search
+npm install
+```
+
+### 3. Configure Environment Variables
+
+```bash
+cp .env.example .env.local
+```
+
+Edit `.env.local` and set your RPC URL:
+
+```env
+ETHEREUM_RPC_URL=https://eth-mainnet.g.alchemy.com/v2/YOUR_KEY
+```
+
+All other variables are optional and have sensible defaults (see [Environment Variables](#environment-variables)).
+
+### 4. Run the Development Server
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### 5. Verify Everything Works
+
+Try these searches from the home page to confirm the app is connected to your RPC:
+
+| Search type | Example input |
+|---|---|
+| Block number | `1` or `19000000` |
+| Transaction hash | `0x5c504ed432cb51138bcf09aa5e8a410dd4a1e204ef84bfed1be16dfba1b22060` |
+| Address | `0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045` (vitalik.eth) |
+| ENS name | `vitalik.eth` |
+
+### 6. Production Build (Optional)
+
+To test the production build locally:
+
+```bash
+npm run build
+npm run start
+```
+
+The production server starts at [http://localhost:3000](http://localhost:3000).
+
+### 7. Linting
+
+```bash
+npm run lint
+```
+
+### Troubleshooting
+
+| Issue | Fix |
+|---|---|
+| `Invalid environment variables` error on startup | Ensure `ETHEREUM_RPC_URL` is set in `.env.local` and is a valid URL |
+| RPC rate limit / 429 errors | Lower `RPC_REQUESTS_PER_SECOND` in `.env.local` (e.g., `5`) |
+| Turbopack root warning | Already handled in `next.config.ts` — safe to ignore |
+
 ## Architecture
 
 - **API routes** proxy all RPC calls server-side for caching, rate limiting, and BigInt serialization
